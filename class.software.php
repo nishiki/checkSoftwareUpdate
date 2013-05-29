@@ -283,14 +283,37 @@
 		// Get list to id
 		// @rtrn: array with id
 		public function getIdList() {
-			$query = 'SELECT id
-			          FROM software
-			          ORDER BY name;';
-			$result = $this->sql->query($query);
-			while ($row = $result->fetch_assoc()){
-				$data[] = $row['id'];
+			$query = $this->sql->prepare('SELECT id
+			                              FROM software
+			                              ORDER BY name;');
+			$query->execute();
+			$query->bind_result($id);
+
+			while ($query->fetch()){
+				$data[] = $id;
 			}
-			$result->free();
+			$query->free_result();
+
+			return $data;
+
+		}
+		
+		// Get list to id
+		// @args: $category -> the category
+		// @rtrn: array with id
+		public function getIdListByCategory($category) {
+			$query = $this->sql->prepare('SELECT id
+			                              FROM software
+			                              WHERE category=?
+			                              ORDER BY name;');
+			$query->bind_param('s', $cateogry);
+			$query->execute();
+			$query->bind_result($id);
+
+			while ($query->fetch()){
+				$data[] = $id;
+			}
+			$query->free_result();
 
 			return $data;
 
