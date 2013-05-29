@@ -20,7 +20,6 @@
 		echo '<td>'.$soft->getPreviewVersion().'</td>';
 		echo '<td>'.$soft->getPreviewDate().'</td>';
 		echo '</tr>'."\n";
-		$soft->close();
 	}
 	echo '</table>'."\n";
 	echo '</body>'."\n";

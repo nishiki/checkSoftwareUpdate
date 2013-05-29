@@ -37,7 +37,7 @@
 
 		// Set the error indicator
 		// @rtrn: false if there is an error
-		private function close() {
+		public function close() {
 			$query = $this->sql->prepare('UPDATE version
 			                              SET error=?
 			                              WHERE id=?
