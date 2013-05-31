@@ -13,8 +13,8 @@
 	if (!is_null($_POST['add'])) {
 		$mysql = new mysqli($db_server, $db_user, $db_passwd, $db_name);
 		$software = new Software($mysql);
-		if ($software->add($_POST['name'], $_POST['url'], $_POST['url_regex'], $_POST['regex'])) {
-			echo '<p>Le logiciel <b>'.$software->getName().'</b> a bien été ajouté</p>';
+		if ($software->add($_POST['name'], $_POST['category'], $_POST['url'], $_POST['url_regex'], $_POST['regex'])) {
+			echo '<p>The software <b>'.$software->getName().'</b> has been added!</p>';
 		}
 		$mysql->close();
 	}
@@ -22,6 +22,7 @@
 ?>
 		<form method="post" action="">
 		<p><label>Software name: </label><input type="text" name="name" /></p>
+		<p><label>Category: </label><input type="text" name="category" /></p>
 		<p><label>Official website url: </label><input type="text" name="url" /></p>
 		<p><label>URL to check version: </label><input type="text" name="url_regex" /></p>
 		<p><label>Regex to find version: </label><input type="text" name="regex" /></p>
