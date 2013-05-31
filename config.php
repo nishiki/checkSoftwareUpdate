@@ -7,4 +7,5 @@
 
 	$mail_send = true;
 	$mail_subject = '[UPDATER] new version';
-	$mail_senders = 'mail1@exemple.com mail2@exemple.com';
+	$mail_senders = array('mail1@exemple.com',
+	                      'mail2@exemple.com');

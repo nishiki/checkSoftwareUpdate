@@ -3,20 +3,20 @@
 	include('config.php');
 	include('class.software.php');
 
-	$message = "";
+	$message = null;
 
 	$mysql = new mysqli($db_server, $db_user, $db_passwd, $db_name);
 	
 	$software = new Software($mysql);
 
-	foreach ($software->getListId() as $id) {
+	foreach ($software->getIdList() as $id) {
 		$soft = new Software($mysql, $id);
 		if ($soft->checkVersion()) {
-			$message += $soft->getName().' ---> new version: '.$soft->getVersion().' ---> old version: '.$soft->getPreviewVersion()."\n";
+			$message .= $soft->getName().' ---> new version: '.$soft->getVersion().' ---> old version: '.$soft->getPreviewVersion()."\n";
 		}
-		$soft->close();
+		#$soft->close();
 	}
-
+	
 	// Send notification
 	if (!is_null($message)) {
 		if ($mail_send) {
